@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elige Tu Color Favorito</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      transition: background-color 0.5s ease; /* Transición suave para el cambio de color */
+    }
+
+    .color-container {
+      text-align: center;
+    }
+
+    .color-button {
+      width: 100px;
+      height: 40px;
+      margin: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #333;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="bg-gray-200">
+  <div class="color-container">
+    <h1 class="text-4xl font-bold mb-4">Elige Tu Color Favorito</h1>
+    <div id="color-buttons" class="flex flex-wrap gap-4">
+      <button class="color-button" style="background-color: #ff5733;" onclick="changeColor('#ff5733')">Rojo</button>
+      <button class="color-button" style="background-color: #33ff57;" onclick="changeColor('#33ff57')">Verde</button>
+      <button class="color-button" style="background-color: #5733ff;" onclick="changeColor('#5733ff')">Azul</button>
+      <button class="color-button" style="background-color: #ff33e6;" onclick="changeColor('#ff33e6')">Rosado</button>
+      <button class="color-button" style="background-color: #33a1ff;" onclick="changeColor('#33a1ff')">Azul Claro</button>
+      <button class="color-button" style="background-color: #33ffcc;" onclick="changeColor('#33ffcc')">Turquesa</button>
+      <button class="color-button" style="background-color: #ffcc33;" onclick="changeColor('#ffcc33')">Amarillo</button>
+      <button class="color-button" style="background-color: #a133ff;" onclick="changeColor('#a133ff')">Morado</button>
+      <button class="color-button" style="background-color: #ff6666;" onclick="changeColor('#ff6666')">Salmon</button>
+      <button class="color-button" style="background-color: #66ff66;" onclick="changeColor('#66ff66')">Verde Claro</button>
+      <button class="color-button" style="background-color: #6666ff;" onclick="changeColor('#6666ff')">Azul Oscuro</button>
+      <button class="color-button" style="background-color: #ff9966;" onclick="changeColor('#ff9966')">Naranja</button>
+      <!-- Puedes agregar más botones según sea necesario -->
+      <button class="color-button bg-gray-500 text-white rounded" onclick="resetColor()">Resetear Color</button>
+    </div>
+  </div>
+
+  <script>
+    function changeColor(color) {
+      document.body.style.backgroundColor = color;
+    }
+
+    function resetColor() {
+      document.body.style.backgroundColor = '';
+    }
+  </script>
+</body>
+</html>
