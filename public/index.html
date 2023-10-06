@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elige Tu Color Favorito</title>
+  <title>Elige Tu Color</title>
   <style>
     body {
       display: flex;
@@ -12,11 +12,7 @@
       justify-content: center;
       height: 100vh;
       margin: 0;
-      transition: background-color 0.5s ease; /* Transición suave para el cambio de color */
-    }
-
-    .color-container {
-      text-align: center;
+      transition: background-color 0.2s ease; /* Transición rápida para el cambio de color */
     }
 
     .color-button {
@@ -33,9 +29,10 @@
 </head>
 <body class="bg-gray-200">
   <div class="color-container">
-    <h1 class="text-4xl font-bold mb-4">Elige Tu Color Favorito</h1>
+    <h1 class="text-4xl font-bold mb-8">Elige Tu Color Favorito</h1>
     <div id="color-buttons" class="flex flex-wrap gap-4">
       <button class="color-button" style="background-color: #ff5733;" onclick="changeColor('#ff5733')">Rojo</button>
+      <!-- Agrega más botones según sea necesario -->
       <button class="color-button" style="background-color: #33ff57;" onclick="changeColor('#33ff57')">Verde</button>
       <button class="color-button" style="background-color: #5733ff;" onclick="changeColor('#5733ff')">Azul</button>
       <button class="color-button" style="background-color: #ff33e6;" onclick="changeColor('#ff33e6')">Rosado</button>
@@ -47,18 +44,56 @@
       <button class="color-button" style="background-color: #66ff66;" onclick="changeColor('#66ff66')">Verde Claro</button>
       <button class="color-button" style="background-color: #6666ff;" onclick="changeColor('#6666ff')">Azul Oscuro</button>
       <button class="color-button" style="background-color: #ff9966;" onclick="changeColor('#ff9966')">Naranja</button>
-      <!-- Puedes agregar más botones según sea necesario -->
       <button class="color-button bg-gray-500 text-white rounded" onclick="resetColor()">Resetear Color</button>
+      <button class="color-button bg-gray-500 text-white rounded" onclick="startCycle()">Ciclo de Colores</button>
     </div>
   </div>
 
   <script>
+    // Función para cambiar el color de fondo
     function changeColor(color) {
       document.body.style.backgroundColor = color;
+      localStorage.setItem('currentColor', color);
     }
 
+    // Función para restablecer el color de fondo
     function resetColor() {
       document.body.style.backgroundColor = '';
+      localStorage.removeItem('currentColor');
+    }
+
+    // Función para obtener el color actual del localStorage
+    function getCurrentColor() {
+      return localStorage.getItem('currentColor');
+    }
+
+    // Función para el ciclo de colores
+    function startCycle() {
+      const colors = [
+        "#ff5733", "#33ff57", "#5733ff", "#ff33e6", "#33a1ff",
+        "#33ffcc", "#ffcc33", "#a133ff", "#ff6666", "#66ff66",
+        "#6666ff", "#ff9966"
+      ];
+
+      let currentIndex = 0;
+
+      // Cambia el color cada 200 milisegundos (0.2 segundos)
+      const intervalId = setInterval(() => {
+        const color = colors[currentIndex];
+        changeColor(color);
+        currentIndex = (currentIndex + 1) % colors.length;
+      }, 200);
+
+      // Detiene el ciclo después de 5 segundos (5000 milisegundos)
+      setTimeout(() => {
+        clearInterval(intervalId);
+      }, 5000);
+    }
+
+    // Restaura el color desde localStorage al cargar la página
+    const storedColor = getCurrentColor();
+    if (storedColor) {
+      changeColor(storedColor);
     }
   </script>
 </body>
